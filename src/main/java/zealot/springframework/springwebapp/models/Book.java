@@ -16,7 +16,9 @@ public class Book {
     private Long id;
     private String title;
     private String ibsn;
-    private String publisher;
+
+    @OneToOne
+    private Publisher publisher;
 
     @ManyToMany // JPA generate many to many relationship
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
@@ -25,13 +27,13 @@ public class Book {
 
     public Book(){};
 
-    public Book(String title, String ibsn, String publisher) {
+    public Book(String title, String ibsn, Publisher publisher) {
         this.title = title;
         this.ibsn = ibsn;
         this.publisher = publisher;
     }
 
-    public Book(String title, String ibsn, String publisher, Set<Author> authors) {
+    public Book(String title, String ibsn, Publisher publisher, Set<Author> authors) {
         this.title = title;
         this.ibsn = ibsn;
         this.publisher = publisher;
@@ -62,11 +64,11 @@ public class Book {
         this.ibsn = ibsn;
     }
 
-    public String getPublisher() {
+    public Publisher getPublisher() {
         return publisher;
     }
 
-    public void setPublisher(String publisher) {
+    public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
     }
 
